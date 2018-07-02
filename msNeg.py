@@ -6,18 +6,15 @@ import csv
 import matplotlib.pyplot as plt
 
 files = [
-#'mass-scan-pos-neg-4-13-18-4600-20180622-142124.csv',
-#'mass-scan-pos-neg-4-13-18-4607-20180622-150245.csv',
-#'mass-scan-pos-neg-4-13-18-4608-20180622-151114.csv'
-#'mass-scan-pos-neg-4-13-18-4615-20180622-182527.csv',
-#'mass-scan-pos-neg-4-13-18-4619-20180622-184858.csv',
-#'mass-scan-pos-neg-4-13-18-4623-20180622-190449.csv'
-#'mass-scan-pos-neg-4-13-18-4659-20180625-172435.csv',
-#'mass-scan-pos-neg-4-13-18-4663-20180625-174200.csv',
-#'mass-scan-pos-neg-4-13-18-4667-20180625-180620.csv'
-'mass-scan-pos-neg-4-13-18-4701-20180626-162915.csv',
-'mass-scan-pos-neg-4-13-18-4697-20180626-160732.csv',
-'mass-scan-pos-neg-4-13-18-4690-20180626-153051.csv'
+'mass-scan-pos-neg-4-13-18-4615-20180622-182527.csv', #juul
+'mass-scan-pos-neg-4-13-18-4619-20180622-184858.csv', #g6
+'mass-scan-pos-neg-4-13-18-4623-20180622-190449.csv' #blu
+#'mass-scan-pos-neg-4-13-18-4690-20180626-153051.csv', #juul
+#'mass-scan-pos-neg-4-13-18-4701-20180626-162915.csv', #blu
+#'mass-scan-pos-neg-4-13-18-4697-20180626-160732.csv', #g6
+#'mass-scan-pos-neg-4-13-18-4836-20180628-171152.csv', #juul
+#'mass-scan-pos-neg-4-13-18-4840-20180628-172915.csv', #g6
+#'mass-scan-pos-neg-4-13-18-4841-20180628-173842.csv' #blu
 ]
 
 # precursor ion list 
@@ -40,7 +37,7 @@ def roundup(x):
 
 # helper function to get label for ecig
 def getlabel(filename):
-	if filename == 'mass-scan-pos-neg-4-13-18-4619-20180622-184858.csv':
+	if filename == 'mass-scan-pos-neg-4-13-18-4619-20180622-184858.csv': #g6
 		return 'G6'
 	elif filename == 'mass-scan-pos-neg-4-13-18-4615-20180622-182527.csv':
 		return 'Juul'

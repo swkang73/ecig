@@ -39,105 +39,124 @@ files = [
 'mass-scan-pos-neg-4-13-18-4659-20180625-172435.csv', #juul
 'mass-scan-pos-neg-4-13-18-4667-20180625-180620.csv', # blu
 #trial 4
+'mass-scan-pos-neg-4-13-18-4690-20180626-153051.csv',
 'mass-scan-pos-neg-4-13-18-4697-20180626-160732.csv', #g6
-'mass-scan-pos-neg-4-13-18-4690-20180626-153051.csv', #juul
-'mass-scan-pos-neg-4-13-18-4701-20180626-162915.csv', #blu
+'mass-scan-pos-neg-4-13-18-4701-20180626-162915.csv',
 #trial 5
 'mass-scan-pos-neg-4-13-18-4840-20180628-172915.csv', #g6
 'mass-scan-pos-neg-4-13-18-4836-20180628-171152.csv', #juul
 'mass-scan-pos-neg-4-13-18-4841-20180628-173842.csv' #blu
 ]
 
-# comp arrays list of lists of lists
-# first level: sample comp
-# second level: different precursor ion measurements
-comp = []
 
-# helper functions 
+# helper function - standardization bef pca 
+def getStd(vals):
+	stdComp = []
+	for val in vals:
+		comp.append(StandardScaler().fit_transform(val))
+	return stdComp
+
+
+# helper functions for visualization
 # add label when in order of g6/juul/blu
 def getlabel(index):
-	if index % NUMBER_OF_CIG == 0:
-		return 'G6'
-		#return 'G6 '+ str(index/3)
+	'''if index % NUMBER_OF_CIG == 0:
+		return 'G6 '+ str(index/3)
 	elif index % NUMBER_OF_CIG == 1 :
-		return 'Juul'
-		#return 'Juul ' + str(index/3 + INDEX)
+		return 'Juul ' + str(index/3)
 	else:
-		return 'Blu'
-		#return 'Blu ' + str(index/3 + INDEX)
-
-def getcolor(index):
-	if index % NUMBER_OF_CIG == 0:
-		return 'red'
-	elif index % NUMBER_OF_CIG == 1:
-		return 'blue'
-	elif index % NUMBER_OF_CIG == 2:
-		return 'green'
-	
-
-def getion(index):
+		return 'Blu ' + str(index/3)'''
 	if index % NUMBER_OF_IONS == 0:
 		return 'H3O+'
 	elif index % NUMBER_OF_IONS == 1:
 		return 'NO+'
 	elif index % NUMBER_OF_IONS == 2:
 		return 'O2+'
-	elif index % NUMBER_OF_IONS == 3:
-		return 'O2-'
 	elif index % NUMBER_OF_IONS == 4:
-		return 'OH-'
+		return 'O2-'
 	elif index % NUMBER_OF_IONS == 5:
 		return 'O-'
 	elif index % NUMBER_OF_IONS == 6:
+		return 'OH-'
+	elif index % NUMBER_OF_IONS == 7:
 		return 'NO2-'
 	else:
 		return 'NO3-'
 
+# helper functions for visualization 
+# add label for each ions
+def getcolor(index):
+	if index % NUMBER_OF_IONS == 0:
+		return 'red'
+	elif index % NUMBER_OF_IONS == 1:
+		return 'blue'
+	elif index % NUMBER_OF_IONS == 2:
+		return 'green'
+	elif index % NUMBER_OF_IONS == 4:
+		return 'purple'
+	elif index % NUMBER_OF_IONS == 5:
+		return 'orange'
+	elif index % NUMBER_OF_IONS == 6:
+		return 'brown'
+	elif index % NUMBER_OF_IONS == 7:
+		return 'olive'
+	else:
+		return 'pink'
+
 # import data from csv files 
+# crucial data structure extracted across diff files 
+data_H3O, data_NO, data_O2pos, data_O2neg, data_OH, data_O, data_NO2, data_NO3 = ([] for i in range(8))
+
 for file in files:
 	with open('p_e_' + file, 'r') as csv_file:
 		csv_reader = csv.reader(csv_file)
-		data_H3O, data_NO, data_O2pos, data_O2neg, data_OH, data_O, data_NO2, data_NO3 = ([] for i in range(8))
+		array1, array2, array3, array4, array5, array6, array7, array8 = ([] for i in range(8))
 
 		for line in csv_reader: 
 			if(line[0]==str(H3O) and int(line[1]) < (MZEND + 1)):
-				data_H3O.append(float(line[2]))
+				array1.append(float(line[2]))
 			elif(line[0]==str(NO) and int(line[1]) < (MZEND + 1)):
-				data_NO.append(float(line[2]))
+				array2.append(float(line[2]))
 			elif(line[0]==str(O2) and int(line[1]) < (MZEND + 1)):
-				if len(data_O2pos) < (MZEND - MZSTART + 1):
-					data_O2pos.append(float(line[2]))
+				if len(array3) < (MZEND - MZSTART + 1):
+					array3.append(float(line[2]))
 				else:
-					data_O2neg.append(float(line[2]))
+					array4.append(float(line[2]))
 			elif(line[0]==str(O) and int(line[1]) < (MZEND + 1)):
-				data_O.append(float(line[2]))
+				array5.append(float(line[2]))
 			elif(line[0]==str(OH) and int(line[1]) < (MZEND + 1)):
-				data_OH.append(float(line[2]))
+				array6.append(float(line[2]))
 			elif(line[0]==str(NO2) and int(line[1]) < (MZEND + 1)):
-				data_NO2.append(float(line[2]))
+				array7.append(float(line[2]))
 			elif(line[0]==str(NO3) and int(line[1]) < (MZEND + 1)):
-				data_NO3.append(float(line[2]))
+				array8.append(float(line[2]))
 
-	comp.append([data_H3O, data_NO, data_O2pos, data_O2neg, data_OH, data_O, data_NO2, data_NO3])
+		data_H3O.append(array1)
+		data_NO.append(array2)
+		data_O2pos.append(array3)
+		data_O2neg.append(array4)
+		data_O.append(array5)
+		data_OH.append(array6)
+		data_NO2.append(array7)
+		data_NO3.append(array8)
 
-# place to run PCA onto comp
+data = [data_H3O, data_NO, data_O2pos, data_O2neg, data_OH, data_O, data_NO2, data_NO3]
 Y = []
 pca = PCA(n_components=2)
 
-for sample in comp:
-	std_sample = StandardScaler().fit_transform(sample)
-	Y.append(pca.fit_transform(std_sample))
+
+# standardize then run pca analysis
+for d in data:
+	std_data = StandardScaler().fit_transform(d)
+	Y.append(pca.fit_transform(std_data))
 
 # rendering PCA data 
-fig = plt.figure(figsize=(10,6))
+#fig = plt.figure(figsize=(10,6))
 
-i = INDEX
+i = 0
 for y in Y:
-	if i < INDEX * 4:
-		plt.scatter(y[:,0], y[:,1], marker='o', alpha=0.7, label=getlabel(i), color=getcolor(i))
-	else:
-		plt.scatter(y[:,0], y[:,1], marker='o', alpha=0.7, color=getcolor(i))
-	i += INDEX
+	plt.scatter(y[:,0], y[:,1], marker='o', alpha=0.7, color=getcolor(i), label=getlabel(i))
+	i += 1
 	
 plt.xlabel('First Principal Component')
 plt.ylabel('Second Principal Component')
