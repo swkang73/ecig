@@ -23,6 +23,7 @@ OH = 17 #index 4
 O = 16 #index 5
 NO2 = 46 #index 6
 NO3 = 62 #index 7
+IONS = [H3O, NO, O2, OH, O, NO2, NO3]
 
 
 files = [
@@ -53,7 +54,7 @@ files = [
 # second level: different precursor ion measurements
 comp = []
 
-# helper functions 
+# helper functions for rendering 
 # add label when in order of g6/juul/blu
 def getlabel(index):
 	if index % NUMBER_OF_CIG == 0:
@@ -66,6 +67,7 @@ def getlabel(index):
 		return 'Blu'
 		#return 'Blu ' + str(index/3 + INDEX)
 
+# get color by each cig type
 def getcolor(index):
 	if index % NUMBER_OF_CIG == 0:
 		return 'red'
@@ -74,7 +76,7 @@ def getcolor(index):
 	elif index % NUMBER_OF_CIG == 2:
 		return 'green'
 	
-
+# label by order of ions 
 def getion(index):
 	if index % NUMBER_OF_IONS == 0:
 		return 'H3O+'
@@ -119,6 +121,9 @@ for file in files:
 				data_NO3.append(float(line[2]))
 
 	comp.append([data_H3O, data_NO, data_O2pos, data_O2neg, data_OH, data_O, data_NO2, data_NO3])
+
+# process data 
+
 
 # place to run PCA onto comp
 Y = []
