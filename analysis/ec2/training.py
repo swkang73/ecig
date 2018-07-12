@@ -29,7 +29,15 @@ files = [
 # trial 6
 'mass-scan-pos-neg-4-13-18-4897-20180702-165302.csv', # g6
 'mass-scan-pos-neg-4-13-18-4893-20180702-162712.csv', # juul
-'mass-scan-pos-neg-4-13-18-5115-20180710-124320.csv' # blu
+'mass-scan-pos-neg-4-13-18-5115-20180710-124320.csv', # blu
+# trial 7
+'mass-scan-pos-neg-4-13-18-5110-20180710-122638.csv', # g6
+'mass-scan-pos-neg-4-13-18-5098-20180709-191303.csv', # juul
+'mass-scan-pos-neg-4-13-18-5122-20180710-131215.csv', # blu
+#trial 8
+'mass-scan-pos-neg-4-13-18-5166-20180711-143331.csv', #g6
+'mass-scan-pos-neg-4-13-18-5160-20180711-141428.csv', #juul 
+'mass-scan-pos-neg-4-13-18-5171-20180711-145222.csv' #blu
 ]
 
 # Consts

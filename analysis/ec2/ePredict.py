@@ -1,12 +1,22 @@
 '''Endometriosis Classifier
 reference: https://www.kaggle.com/cyberzhg/sklearn-pca-svm/data
 '''
-import numpy as np
+import numpy as np, csv
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.svm import SVC
 
 COMPONENT_NUM = 10
+CIGTOTAL = 3
+G6 = 1
+JUUL = 2
+BLU = 3
+
+
+def getAns(index):
+    if index % CIGTOTAL != 0:
+        return index % CIGTOTAL
+    return BLU
 
 print('Read training data...')
 with open('training.csv', 'r') as reader:
@@ -43,10 +53,12 @@ test_data = pca.transform(test_data)
 predict = svc.predict(test_data)
 
 print('Saving...')
-with open('predict.csv', 'w') as writer:
-    writer.write('"Index","Label"\n')
+with open('predict.csv', 'w') as outcsv:
+    writer = csv.DictWriter(outcsv, fieldnames = ['Index', 'Prediction', 'Actual'])
+    writer.writeheader()
+
     count = 0
     for p in predict:
         count += 1
-        writer.write(str(count) + ',"' + str(p) + '"\n')
+        writer.writerow({'Index': str(count), 'Prediction': str(p), 'Actual': str(getAns(count))})
 
