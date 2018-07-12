@@ -6,9 +6,12 @@ import csv
 import matplotlib.pyplot as plt
 
 files = [
-'mass-scan-pos-neg-4-13-18-4615-20180622-182527.csv', #juul
-'mass-scan-pos-neg-4-13-18-4619-20180622-184858.csv', #g6
-'mass-scan-pos-neg-4-13-18-4623-20180622-190449.csv' #blu
+'mass-scan-pos-neg-4-13-18-4600-20180622-142124.csv', # g6 
+'mass-scan-pos-neg-4-13-18-4607-20180622-150245.csv', # juul
+'mass-scan-pos-neg-4-13-18-4608-20180622-151114.csv' # blu
+#'mass-scan-pos-neg-4-13-18-4615-20180622-182527.csv', #juul
+#'mass-scan-pos-neg-4-13-18-4619-20180622-184858.csv', #g6
+#'mass-scan-pos-neg-4-13-18-4623-20180622-190449.csv' #blu
 #'mass-scan-pos-neg-4-13-18-4690-20180626-153051.csv', #juul
 #'mass-scan-pos-neg-4-13-18-4701-20180626-162915.csv', #blu
 #'mass-scan-pos-neg-4-13-18-4697-20180626-160732.csv', #g6
@@ -37,9 +40,9 @@ def roundup(x):
 
 # helper function to get label for ecig
 def getlabel(filename):
-	if filename == 'mass-scan-pos-neg-4-13-18-4619-20180622-184858.csv': #g6
+	if filename == 'mass-scan-pos-neg-4-13-18-4600-20180622-142124.csv':
 		return 'G6'
-	elif filename == 'mass-scan-pos-neg-4-13-18-4615-20180622-182527.csv':
+	elif filename == 'mass-scan-pos-neg-4-13-18-4607-20180622-150245.csv':
 		return 'Juul'
 	else:
 		return 'Blu'
@@ -194,3 +197,4 @@ for file in files:
 	plt.subplots_adjust(wspace=0.2, hspace=0.4)
 	fig.savefig('ms_no3_'+file+'.png')
 
+	plt.close()
