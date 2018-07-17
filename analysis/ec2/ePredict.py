@@ -1,4 +1,5 @@
-'''Endometriosis Classifier
+'''E-cigarette Classifier
+classifies e-cigarette mass scan into three e-cig (G6 / Juul / Blu)
 reference: https://www.kaggle.com/cyberzhg/sklearn-pca-svm/data
 '''
 import numpy as np, csv
