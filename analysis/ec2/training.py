@@ -37,7 +37,19 @@ files = [
 #trial 8
 'mass-scan-pos-neg-4-13-18-5166-20180711-143331.csv', #g6
 'mass-scan-pos-neg-4-13-18-5160-20180711-141428.csv', #juul 
-'mass-scan-pos-neg-4-13-18-5171-20180711-145222.csv' #blu
+'mass-scan-pos-neg-4-13-18-5171-20180711-145222.csv', #blu
+# trial 9
+'mass-scan-pos-neg-4-13-18-5187-20180711-181539.csv', #g6
+'mass-scan-pos-neg-4-13-18-5198-20180711-185413.csv', #juul
+'mass-scan-pos-neg-4-13-18-5204-20180711-191256.csv', #blu
+# trial 10
+'mass-scan-pos-neg-4-13-18-5235-20180712-134449.csv', #g6
+'mass-scan-pos-neg-4-13-18-5229-20180712-132412.csv', #juul
+'mass-scan-pos-neg-4-13-18-5250-20180712-150005.csv', #blu
+# trial 11
+'mass-scan-pos-neg-4-13-18-5265-20180712-172235.csv', #g6
+'mass-scan-pos-neg-4-13-18-5274-20180712-174609.csv', #juul
+'mass-scan-pos-neg-4-13-18-5288-20180712-191958.csv' #blu
 ]
 
 # Consts

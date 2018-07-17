@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.svm import SVC
 
-COMPONENT_NUM = 10
+COMPONENT_NUM = 20
 CIGTOTAL = 3
 G6 = 1
 JUUL = 2

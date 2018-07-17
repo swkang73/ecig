@@ -6,14 +6,18 @@ import csv
 
 # normal files
 files = [
-# trial 9
-'mass-scan-pos-neg-4-13-18-5187-20180711-181539.csv', #g6
-'mass-scan-pos-neg-4-13-18-5198-20180711-185413.csv', #juul
-'mass-scan-pos-neg-4-13-18-5204-20180711-191256.csv', #blu
-# trial 10
-'mass-scan-pos-neg-4-13-18-5235-20180712-134449.csv', #g6
-'mass-scan-pos-neg-4-13-18-5229-20180712-132412.csv', #juul
-'mass-scan-pos-neg-4-13-18-5250-20180712-150005.csv' #blu
+# trial 12
+'mass-scan-pos-neg-4-13-18-5305-20180712-200505.csv', #g6
+'mass-scan-pos-neg-4-13-18-5297-20180712-194355.csv', #juul
+'mass-scan-pos-neg-4-13-18-5313-20180712-202745.csv', #blu
+# trial 13
+'mass-scan-pos-neg-4-13-18-5349-20180713-133558.csv', #g6
+'mass-scan-pos-neg-4-13-18-5338-20180713-123434.csv', #juul
+'mass-scan-pos-neg-4-13-18-5365-20180713-145957.csv', #blu
+# trial 14
+'mass-scan-pos-neg-4-13-18-5389-20180713-180718.csv', #g6
+'mass-scan-pos-neg-4-13-18-5381-20180713-174608.csv', #juul
+'mass-scan-pos-neg-4-13-18-5459-20180717-132436.csv' #blu
 ]
 
 # Consts
