@@ -1,4 +1,4 @@
-'''E-cigarette Classifier
+'''E-cigarette PCA Classifier
 classifies e-cigarette mass scan into three e-cig (G6 / Juul / Blu)
 reference: https://www.kaggle.com/cyberzhg/sklearn-pca-svm/data
 '''
@@ -54,7 +54,7 @@ test_data = pca.transform(test_data)
 predict = svc.predict(test_data)
 
 print('Saving...')
-with open('predict.csv', 'w') as outcsv:
+with open('pca_predict.csv', 'w') as outcsv:
     writer = csv.DictWriter(outcsv, fieldnames = ['Index', 'Prediction', 'Actual'])
     writer.writeheader()
 
