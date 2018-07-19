@@ -1,4 +1,4 @@
-'''E-cigarette PCA Classifier
+'''E-cigarette PCA + SVM Classifier
 classifies e-cigarette mass scan into three e-cig (G6 / Juul / Blu)
 reference: https://www.kaggle.com/cyberzhg/sklearn-pca-svm/data
 '''

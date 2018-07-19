@@ -4,11 +4,9 @@ reference: https://www.kaggle.com/cyberzhg/sklearn-pca-svm/data
 '''
 
 import numpy as np, matplotlib.pyplot as plt, seaborn as sns
-
-from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
-COMPONENT_NUM = 15
+COMPONENT_NUM = 21
 CIGTOTAL = 3
 G6, JUUL, BLU = 1, 2, 3
 
@@ -22,13 +20,16 @@ with open('training.csv', 'r') as reader:
         train_data.append(data[1:])
 print('Loaded ' + str(len(train_label)))
 
-# step 2: PCA reduction 
-print('Reduction...')
+# step 2: PCA reduction + svm
+print('PCA Reduction and SVM fitting...')
 train_label = np.array(train_label)
 train_data = np.array(train_data)
 pca = PCA(n_components=COMPONENT_NUM, whiten=True)
 pca.fit(train_data)
 train_data = pca.transform(train_data)
+
+svc = SVC()
+svc.fit(train_data, train_label)
 
 # step 3: plot explained variance ratio
 # helper function to add label
@@ -52,7 +53,7 @@ rec = ax.bar(index, Y, bar_width, alpha=opacity, color='g')
 ax.set_ylim(0., 1.2)
 autolabel(rec)'''
 
-def addLineLabel(plot, values):
+'''def addLineLabel(plot, values):
 	i = 0
 	for val in values:
 		plot.annotate('%.3f' % val, xy=(i, np.log10(val + 1)), ha='center')
@@ -68,11 +69,11 @@ plt.xlabel('number of components')
 plt.ylabel('cumulative explained variance')
 plt.title('cumulative variance explained up to 14 trials of E-cig measurements')
 plt.legend(loc=3)
-plt.show()
+plt.show()'''
 
 # step 4: plot PCAs into 2D plot
 # reference: https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html
-'''def getcolor(index):
+def getcolor(index):
 	if index % CIGTOTAL == 0:
 		return 'r'
 	elif index % CIGTOTAL == 1: 
@@ -104,7 +105,7 @@ for i in range(len(train_data[0]) - 1):
 		plt.ylabel('No. %d Principal Component' % (j + 1))
 		plt.legend(loc=1)
 		plt.show()
-		fig.savefig('pca_%d_%d.png' % (i+1, j+1))'''
+		fig.savefig('pca_%d_%d.png' % (i+1, j+1))
 
 # step 5: plot PCAs heatmap
 '''fig = plt.figure(figsize=(16,6))
@@ -113,5 +114,5 @@ ax.set_ylabel('Number of PCs')
 ax.set_xlabel('Feature Column Number')
 plt.title('PCA plot of three e-cig for 14 measurements')
 plt.tight_layout()
-plt.show()
-#fig.savefig('pca_heatmap_abg_14.png')'''
+plt.show()'''
+#fig.savefig('pca_heatmap_abg_14.png')
