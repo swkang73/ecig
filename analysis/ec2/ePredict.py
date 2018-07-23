@@ -20,7 +20,7 @@ def getAns(index):
     return BLU
 
 print('Read training data...')
-with open('training.csv', 'r') as reader:
+with open('training-del.csv', 'r') as reader:
     train_label = []
     train_data = []
     for line in reader.readlines():

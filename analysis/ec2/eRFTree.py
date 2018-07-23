@@ -1,4 +1,4 @@
-'''E-cigarette Random Forest Classifier
+'''Ecig Random Forest Classifier
 classifies e-cigarette mass scan into three e-cig (G6 / Juul / Blu)
 reference 1: https://chrisalbon.com/machine_learning/trees_and_forests/random_forest_classifier_example/
 reference 2: http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
@@ -52,7 +52,7 @@ for i in range(3088):
 # ref 2: https://stackoverflow.com/questions/40155128/plot-trees-for-a-random-forest-in-python-with-scikit-learn
 # parse tree structure and save the info by txt, png, and dot 
 
-f = open('rf_tree_exp.txt', 'a')
+f = open('rf_tree_explanation.txt', 'a')
 for treeIndex in range(len(clf.estimators_)):
     f.write('Tree number %d\n' % (treeIndex + 1))
     n_nodes = clf.estimators_[treeIndex].tree_.node_count
@@ -105,7 +105,7 @@ for treeIndex in range(len(clf.estimators_)):
 f.close()
 
 # see each feature importance
-'''index, count = 0. for i in range(2)
+'''index, count = (0 for i in range(2))
 for imp in clf.feature_importances_:
     if imp != 0.:
         count += 1

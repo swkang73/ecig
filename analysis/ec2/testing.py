@@ -6,18 +6,22 @@ import csv
 
 # normal files
 files = [
-# trial 12
-'mass-scan-pos-neg-4-13-18-5305-20180712-200505.csv', #g6
-'mass-scan-pos-neg-4-13-18-5297-20180712-194355.csv', #juul
-'mass-scan-pos-neg-4-13-18-5313-20180712-202745.csv', #blu
-# trial 13
-'mass-scan-pos-neg-4-13-18-5349-20180713-133558.csv', #g6
-'mass-scan-pos-neg-4-13-18-5338-20180713-123434.csv', #juul
-'mass-scan-pos-neg-4-13-18-5365-20180713-145957.csv', #blu
-# trial 14
-'mass-scan-pos-neg-4-13-18-5389-20180713-180718.csv', #g6
-'mass-scan-pos-neg-4-13-18-5381-20180713-174608.csv', #juul
-'mass-scan-pos-neg-4-13-18-5459-20180717-132436.csv' #blu
+# trial 17
+'mass-scan-pos-neg-4-13-18-5705-20180719-142921.csv', #g6
+'mass-scan-pos-neg-4-13-18-5698-20180719-141026.csv', #juul
+'mass-scan-pos-neg-4-13-18-5712-20180719-144848.csv', #blu
+# trial 18
+'mass-scan-pos-neg-4-13-18-5740-20180719-165941.csv', #g6
+'mass-scan-pos-neg-4-13-18-5732-20180719-163750.csv', #juul
+'mass-scan-pos-neg-4-13-18-5776-20180720-123822.csv', #blu
+# trial 19
+'mass-scan-pos-neg-4-13-18-5797-20180720-140937.csv', #g6
+'mass-scan-pos-neg-4-13-18-5788-20180720-134552.csv', #juul
+'mass-scan-pos-neg-4-13-18-5805-20180720-142933.csv', #blu
+# trial 20
+'mass-scan-pos-neg-4-13-18-5831-20180720-173328.csv', #g6
+'mass-scan-pos-neg-4-13-18-5822-20180720-171116.csv', #juul
+'mass-scan-pos-neg-4-13-18-5842-20180720-180147.csv' #blu
 ]
 
 # Consts

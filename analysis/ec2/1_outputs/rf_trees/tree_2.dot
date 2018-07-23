@@ -1,20 +1,20 @@
 digraph Tree {
 node [shape=box, style="filled", color="black"] ;
-0 [label="923 <= 6365.0\ngini = 0.665\nsamples = 24\nvalue = [12, 11, 10]", fillcolor="#e581390c"] ;
-1 [label="336 <= 25.0\ngini = 0.537\nsamples = 17\nvalue = [12, 1, 10]", fillcolor="#e5813927"] ;
+0 [label="923 <= 6400.0\ngini = 0.661\nsamples = 33\nvalue = [18, 17, 13]", fillcolor="#e5813908"] ;
+1 [label="988 <= 130.0\ngini = 0.544\nsamples = 24\nvalue = [18, 2, 13]", fillcolor="#e5813940"] ;
 0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
-2 [label="512 <= 745.0\ngini = 0.153\nsamples = 9\nvalue = [11, 1, 0]", fillcolor="#e58139e8"] ;
+2 [label="512 <= 890.0\ngini = 0.208\nsamples = 14\nvalue = [15, 2, 0]", fillcolor="#e58139dd"] ;
 1 -> 2 ;
-3 [label="gini = 0.0\nsamples = 1\nvalue = [0, 1, 0]", fillcolor="#39e581ff"] ;
+3 [label="gini = 0.0\nsamples = 2\nvalue = [0, 2, 0]", fillcolor="#39e581ff"] ;
 2 -> 3 ;
-4 [label="gini = 0.0\nsamples = 8\nvalue = [11, 0, 0]", fillcolor="#e58139ff"] ;
+4 [label="gini = 0.0\nsamples = 12\nvalue = [15, 0, 0]", fillcolor="#e58139ff"] ;
 2 -> 4 ;
-5 [label="793 <= 445.0\ngini = 0.165\nsamples = 8\nvalue = [1, 0, 10]", fillcolor="#8139e5e6"] ;
+5 [label="873 <= 34730.0\ngini = 0.305\nsamples = 10\nvalue = [3, 0, 13]", fillcolor="#8139e5c4"] ;
 1 -> 5 ;
-6 [label="gini = 0.0\nsamples = 7\nvalue = [0, 0, 10]", fillcolor="#8139e5ff"] ;
+6 [label="gini = 0.0\nsamples = 9\nvalue = [0, 0, 13]", fillcolor="#8139e5ff"] ;
 5 -> 6 ;
-7 [label="gini = 0.0\nsamples = 1\nvalue = [1, 0, 0]", fillcolor="#e58139ff"] ;
+7 [label="gini = 0.0\nsamples = 1\nvalue = [3, 0, 0]", fillcolor="#e58139ff"] ;
 5 -> 7 ;
-8 [label="gini = 0.0\nsamples = 7\nvalue = [0, 10, 0]", fillcolor="#39e581ff"] ;
+8 [label="gini = 0.0\nsamples = 9\nvalue = [0, 15, 0]", fillcolor="#39e581ff"] ;
 0 -> 8 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
 }

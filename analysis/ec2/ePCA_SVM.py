@@ -91,7 +91,7 @@ plt.ylabel('2nd Principal Component')
 plt.legend(loc=1)
 plt.xticks(())
 plt.yticks(())
-plt.title('E-cig classification of PCA + SVM up to 14 trials')
+plt.title('E-cig classification of PCA + SVM up to 20 trials')
 
 plt.show()
 #fig.savefig('pca_%d_%d.png' % (i+1, j+1))

@@ -1,4 +1,4 @@
-'''E-cigarette Random Forest Classifier
+'''human breath Random Forest Classifier
 classifies e-cigarette mass scan into three e-cig (G6 / Juul / Blu)
 reference 1: https://chrisalbon.com/machine_learning/trees_and_forests/random_forest_classifier_example/
 reference 2: http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
@@ -9,14 +9,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import export_graphviz
 
 MAX_FEATURES = 50
-CIGTOTAL = 3
-G6 = 1
-JUUL = 2
-BLU = 3
+
 
 def getAns(index):
     if (index + 1) % CIGTOTAL != 0:
-        return index % CIGTOTAL
+        return (index + 1) % CIGTOTAL
     return BLU
 
 print('Read training data...')
@@ -51,7 +48,7 @@ predict = clf.predict(test_data)
 prob = clf.predict_proba(test_data)
 
 # save prediction
-'''print('Saving...')
+print('Saving...')
 with open('rf_predict.csv', 'w') as outcsv:
     writer = csv.DictWriter(outcsv, fieldnames = 
     	['Index', 'Prediction', 'Actual', 
@@ -60,13 +57,13 @@ with open('rf_predict.csv', 'w') as outcsv:
 
     count = 0
     for p in predict:
-        writer.writerow({'Index': str(count), 
+        writer.writerow({'Index': str(count + 1), 
         	'Prediction': str(p), 
         	'Actual': str(getAns(count)),
         	'G6 prob': prob[count][0], 
         	'Juul prob': prob[count][1], 
         	'Blu prob': prob[count][2]})
-        count += 1'''
+        count += 1
 
 
 
