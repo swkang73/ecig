@@ -1,4 +1,4 @@
-'''Validate sample size
+'''Validate sample size for random forest
 This script draws empirical learning curve for predicting sample size needed to develop
 learning algorithm for e-cig clasisfication
 
@@ -8,10 +8,9 @@ https://bmcmedinformdecismak.biomedcentral.com/articles/10.1186/1472-6947-12-8
 
 import csv, sys, numpy as np
 import matplotlib.pyplot as plt
-from sklearn.decomposition import PCA
-from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
 
-COMPONENT_NUM = 20
+MAX_FEATURES = 50
 CIGTOTAL = 3
 G6 = 1
 JUUL = 2
@@ -30,7 +29,7 @@ def getY(predicted, actual):
 
 # step 1: see empirical learning curve 
 print('Read training data...')
-with open('training.csv', 'r') as reader:
+with open('training_all.csv', 'r') as reader:
     train_label = []
     train_data = []
     for line in reader.readlines():
@@ -48,12 +47,12 @@ with open('testing.csv', 'r') as reader:
         test_data.append(pixels)
 print('Loaded ' + str(len(test_data)))
 
-print('Empirical learning curve for PCA generated')
+print('Empirical learning curve for RF generated')
 X, Y = ([] for i in range(2))
 
 test_label = [train_label[i] for i in range(len(test_data))]
 original_test_data = np.array(test_data) # same for every iteration
-
+clf = RandomForestClassifier(max_features=MAX_FEATURES, n_jobs=2, random_state=0)
 for sample_size in range(1, len(train_label) / CIGTOTAL):
 	# train with given sample size
 	X.append(sample_size)
@@ -61,22 +60,18 @@ for sample_size in range(1, len(train_label) / CIGTOTAL):
 	train_subset_data = [ train_data[i] for i in range(3 * sample_size) ]
 	train_subset_label = np.array(train_subset_label)
 	train_subset_data = np.array(train_subset_data)
-	pca = PCA(n_components=COMPONENT_NUM, whiten=True)
-	pca.fit(train_subset_data)
-	train_subset_data = pca.transform(train_subset_data)
-	svc = SVC()
-	svc.fit(train_subset_data, train_subset_label)
-
+	clf.fit(train_subset_data, train_subset_label)
+	
 	# test the trained classifier
-	test_data = pca.transform(original_test_data)
-	predict = svc.predict(test_data)
+	predict = clf.predict(original_test_data)
 	Y.append(getY(predict, test_label))
 
 fig, ax = plt.subplots(1, figsize=(8,10))
 ax.plot(X, Y)
+plt.xticks(np.arange(1, len(train_label) / 3, 1.))
 plt.xlabel('sample size')
 plt.ylabel('accuracy')
-plt.title('Empirical learning curve for G6, Blu, and Juul')
+plt.title('Empirical RF learning curve for G6, Blu, and Juul')
 plt.show()
 	
 

@@ -70,6 +70,22 @@ files = [
 'mass-scan-pos-neg-4-13-18-5510-20180717-183911.csv', #g6
 'mass-scan-pos-neg-4-13-18-5518-20180717-190359.csv', #juul
 'mass-scan-pos-neg-4-13-18-5526-20180717-192615.csv', #blu
+# trial 17
+'mass-scan-pos-neg-4-13-18-5705-20180719-142921.csv', #g6
+'mass-scan-pos-neg-4-13-18-5698-20180719-141026.csv', #juul
+'mass-scan-pos-neg-4-13-18-5712-20180719-144848.csv', #blu
+# trial 18
+'mass-scan-pos-neg-4-13-18-5740-20180719-165941.csv', #g6
+'mass-scan-pos-neg-4-13-18-5732-20180719-163750.csv', #juul
+'mass-scan-pos-neg-4-13-18-5776-20180720-123822.csv', #blu
+# trial 19
+'mass-scan-pos-neg-4-13-18-5797-20180720-140937.csv', #g6
+'mass-scan-pos-neg-4-13-18-5788-20180720-134552.csv', #juul
+'mass-scan-pos-neg-4-13-18-5805-20180720-142933.csv', #blu
+# trial 20
+'mass-scan-pos-neg-4-13-18-5831-20180720-173328.csv', #g6
+'mass-scan-pos-neg-4-13-18-5822-20180720-171116.csv', #juul
+'mass-scan-pos-neg-4-13-18-5842-20180720-180147.csv' #blu
 ]
 
 # Consts
@@ -95,7 +111,7 @@ JUUL = 2
 BLU = 3
 
 # write csv file
-out_file = open('training.csv', 'w')
+out_file = open('training_all.csv', 'w')
 writer = csv.writer(out_file)
 
 # helper function for data import 
