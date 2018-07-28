@@ -6,6 +6,22 @@ import csv
 
 # normal files
 files = [
+# trial 13
+'mass-scan-pos-neg-4-13-18-5349-20180713-133558.csv', #g6
+'mass-scan-pos-neg-4-13-18-5338-20180713-123434.csv', #juul
+'mass-scan-pos-neg-4-13-18-5365-20180713-145957.csv', #blu
+# trial 14
+'mass-scan-pos-neg-4-13-18-5389-20180713-180718.csv', #g6
+'mass-scan-pos-neg-4-13-18-5381-20180713-174608.csv', #juul
+'mass-scan-pos-neg-4-13-18-5459-20180717-132436.csv', #blu
+# trial 15
+'mass-scan-pos-neg-4-13-18-5483-20180717-153032.csv', #g6
+'mass-scan-pos-neg-4-13-18-5472-20180717-150119.csv', #juul
+'mass-scan-pos-neg-4-13-18-5494-20180717-163402.csv', #blu
+# trial 16
+'mass-scan-pos-neg-4-13-18-5510-20180717-183911.csv', #g6
+'mass-scan-pos-neg-4-13-18-5518-20180717-190359.csv', #juul
+'mass-scan-pos-neg-4-13-18-5526-20180717-192615.csv', #blu
 # trial 17
 'mass-scan-pos-neg-4-13-18-5705-20180719-142921.csv', #g6
 'mass-scan-pos-neg-4-13-18-5698-20180719-141026.csv', #juul

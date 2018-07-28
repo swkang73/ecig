@@ -8,7 +8,7 @@ import os, csv, numpy as np, matplotlib.pyplot as plt, pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import export_graphviz
 
-MAX_FEATURES = 50
+RANDOM_STATE = 0
 CIGTOTAL = 3
 G6 = 1
 JUUL = 2
@@ -27,7 +27,7 @@ print('Loaded ' + str(len(train_label)))
 print('RF Training...')
 train_label = np.array(train_label)
 train_data = np.array(train_data)
-clf = RandomForestClassifier(max_features=MAX_FEATURES, n_jobs=2, random_state=0)
+clf = RandomForestClassifier(max_features='sqrt', n_jobs=2, random_state=RANDOM_STATE)
 clf.fit(train_data, train_label)
 
 
@@ -105,12 +105,12 @@ for treeIndex in range(len(clf.estimators_)):
 f.close()
 
 # see each feature importance
-'''index, count = (0 for i in range(2))
+index, count = (0 for i in range(2))
 for imp in clf.feature_importances_:
     if imp != 0.:
         count += 1
         print('m/z: %d importance: %.4f' % (index, imp))
     index += 1
-print('total number of features: %d' % count)'''
+print('total number of features: %d' % count)
 
 

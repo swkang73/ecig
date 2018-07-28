@@ -1,16 +1,16 @@
-'''human breath Random Forest Classifier
+'''human breath Artificial Neural Network selection Classifier
+either add PCA / standard scaler
 classifies e-cigarette mass scan into three e-cig (G6 / Juul / Blu)
-reference 1: https://chrisalbon.com/machine_learning/trees_and_forests/random_forest_classifier_example/
-reference 2: http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
+reference 1: http://scikit-learn.org/stable/modules/neural_networks_supervised.html
 '''
 
 import os, csv, numpy as np, matplotlib.pyplot as plt, pandas as pd
-from sklearn.decomposition import PCA
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import StandardScaler 
+from sklearn.decomposition import PCA 
+from sklearn.neural_network import MLPClassifier
 
-
-RANOM_STATE = 0
 COMPONENT_NUM = 20
+RANOM_STATE = 0
 CIGTOTAL = 3
 G6 = 1
 JUUL = 2
@@ -31,14 +31,21 @@ with open('training.csv', 'r') as reader:
         train_data.append(data[1:])
 print('Loaded ' + str(len(train_label)))
 
-print('Reduction and training...')
+print('Neural network training...')
 train_label = np.array(train_label)
 train_data = np.array(train_data)
-pca = PCA(n_components=COMPONENT_NUM, whiten=True)
-pca.fit(train_data)
-train_data = pca.transform(train_data)
-clf = RandomForestClassifier(max_features='sqrt', n_jobs=2, random_state=RANOM_STATE)
+scaler = StandardScaler()
+scaler.fit(train_data)
+train_data = scaler.transform(train_data)
+# pca = PCA(n_components=COMPONENT_NUM, whiten=True)
+# pca.fit(train_data)
+# train_data = pca.transform(train_data)
+# solver suitable for small scale classifier 
+clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=RANOM_STATE)
+# default: clf = MLPClassifier(solver='lbfgs', random_state=RANOM_STATE)
 clf.fit(train_data, train_label)
+
+
 
 print('Read testing data...')
 with open('testing.csv', 'r') as reader:
@@ -50,27 +57,24 @@ print('Loaded ' + str(len(test_data)))
 
 print('Predicting...')
 test_data = np.array(test_data)
-test_data = pca.transform(test_data)
+#test_data = pca.transform(test_data)
+test_data = scaler.transform(test_data)
 predict = clf.predict(test_data)
-prob = clf.predict_proba(test_data)
+print(clf.predict_proba(test_data))
 
 # save prediction
-print('Saving...')
-with open('rf_pca_predict.csv', 'w') as outcsv:
+'''print('Saving...')
+with open('ann_predict.csv', 'w') as outcsv:
     writer = csv.DictWriter(outcsv, fieldnames = 
-    	['Index', 'Prediction', 'Actual', 
-    	'G6 prob', 'Juul prob', 'Blu prob'])
+    	['Index', 'Prediction', 'Actual'])
     writer.writeheader()
 
     count = 0
     for p in predict:
         writer.writerow({'Index': str(count + 1), 
         	'Prediction': str(p), 
-        	'Actual': str(getAns(count)),
-        	'G6 prob': prob[count][0], 
-        	'Juul prob': prob[count][1], 
-        	'Blu prob': prob[count][2]})
-        count += 1
+        	'Actual': str(getAns(count))})
+        count += 1'''
 
 
 

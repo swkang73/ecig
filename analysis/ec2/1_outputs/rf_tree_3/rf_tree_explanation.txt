@@ -1,0 +1,124 @@
+Tree number 1
+The binary tree structure has 11 nodes and has the following tree structure:
+node=0 test node: go to node 1 if measurement as m/z of 584 <= 5030.0 else to node 10.
+	node=1 test node: go to node 2 if measurement as m/z of 878 <= 23875.0 else to node 7.
+		node=2 test node: go to node 3 if measurement as m/z of 977 <= 60.0 else to node 6.
+			node=3 test node: go to node 4 if measurement as m/z of 2514 <= 155.0 else to node 5.
+				node=4 leaf node.
+				node=5 leaf node.
+			node=6 leaf node.
+		node=7 test node: go to node 8 if measurement as m/z of 1710 <= 250.0 else to node 9.
+			node=8 leaf node.
+			node=9 leaf node.
+	node=10 leaf node.
+
+ 
+Tree number 2
+The binary tree structure has 13 nodes and has the following tree structure:
+node=0 test node: go to node 1 if measurement as m/z of 902 <= 490.0 else to node 4.
+	node=1 test node: go to node 2 if measurement as m/z of 247 <= 5.0 else to node 3.
+		node=2 leaf node.
+		node=3 leaf node.
+	node=4 test node: go to node 5 if measurement as m/z of 1180 <= 25.0 else to node 10.
+		node=5 test node: go to node 6 if measurement as m/z of 622 <= 285.0 else to node 9.
+			node=6 test node: go to node 7 if measurement as m/z of 616 <= 505.0 else to node 8.
+				node=7 leaf node.
+				node=8 leaf node.
+			node=9 leaf node.
+		node=10 test node: go to node 11 if measurement as m/z of 852 <= 192716.828125 else to node 12.
+			node=11 leaf node.
+			node=12 leaf node.
+
+ 
+Tree number 3
+The binary tree structure has 5 nodes and has the following tree structure:
+node=0 test node: go to node 1 if measurement as m/z of 483 <= 2210.0 else to node 4.
+	node=1 test node: go to node 2 if measurement as m/z of 167 <= 965.0 else to node 3.
+		node=2 leaf node.
+		node=3 leaf node.
+	node=4 leaf node.
+
+ 
+Tree number 4
+The binary tree structure has 9 nodes and has the following tree structure:
+node=0 test node: go to node 1 if measurement as m/z of 957 <= 675.0 else to node 6.
+	node=1 test node: go to node 2 if measurement as m/z of 878 <= 16285.0 else to node 3.
+		node=2 leaf node.
+		node=3 test node: go to node 4 if measurement as m/z of 405 <= 80.0 else to node 5.
+			node=4 leaf node.
+			node=5 leaf node.
+	node=6 test node: go to node 7 if measurement as m/z of 2329 <= 25.0 else to node 8.
+		node=7 leaf node.
+		node=8 leaf node.
+
+ 
+Tree number 5
+The binary tree structure has 9 nodes and has the following tree structure:
+node=0 test node: go to node 1 if measurement as m/z of 184 <= 10380.0 else to node 4.
+	node=1 test node: go to node 2 if measurement as m/z of 1294 <= 12460.0 else to node 3.
+		node=2 leaf node.
+		node=3 leaf node.
+	node=4 test node: go to node 5 if measurement as m/z of 1370 <= 75.0 else to node 6.
+		node=5 leaf node.
+		node=6 test node: go to node 7 if measurement as m/z of 540 <= 1126843.125 else to node 8.
+			node=7 leaf node.
+			node=8 leaf node.
+
+ 
+Tree number 6
+The binary tree structure has 7 nodes and has the following tree structure:
+node=0 test node: go to node 1 if measurement as m/z of 183 <= 1115.0 else to node 6.
+	node=1 test node: go to node 2 if measurement as m/z of 238 <= 385.0 else to node 5.
+		node=2 test node: go to node 3 if measurement as m/z of 2914 <= 10.0 else to node 4.
+			node=3 leaf node.
+			node=4 leaf node.
+		node=5 leaf node.
+	node=6 leaf node.
+
+ 
+Tree number 7
+The binary tree structure has 7 nodes and has the following tree structure:
+node=0 test node: go to node 1 if measurement as m/z of 1670 <= 5.0 else to node 6.
+	node=1 test node: go to node 2 if measurement as m/z of 860 <= 85675.421875 else to node 3.
+		node=2 leaf node.
+		node=3 test node: go to node 4 if measurement as m/z of 2367 <= 45.0 else to node 5.
+			node=4 leaf node.
+			node=5 leaf node.
+	node=6 leaf node.
+
+ 
+Tree number 8
+The binary tree structure has 9 nodes and has the following tree structure:
+node=0 test node: go to node 1 if measurement as m/z of 844 <= 9805.0 else to node 2.
+	node=1 leaf node.
+	node=2 test node: go to node 3 if measurement as m/z of 945 <= 2290.0 else to node 8.
+		node=3 test node: go to node 4 if measurement as m/z of 978 <= 265.0 else to node 5.
+			node=4 leaf node.
+			node=5 test node: go to node 6 if measurement as m/z of 851 <= 75800.0 else to node 7.
+				node=6 leaf node.
+				node=7 leaf node.
+		node=8 leaf node.
+
+ 
+Tree number 9
+The binary tree structure has 7 nodes and has the following tree structure:
+node=0 test node: go to node 1 if measurement as m/z of 483 <= 3905.0 else to node 6.
+	node=1 test node: go to node 2 if measurement as m/z of 861 <= 5930.0 else to node 3.
+		node=2 leaf node.
+		node=3 test node: go to node 4 if measurement as m/z of 2349 <= 5.0 else to node 5.
+			node=4 leaf node.
+			node=5 leaf node.
+	node=6 leaf node.
+
+ 
+Tree number 10
+The binary tree structure has 7 nodes and has the following tree structure:
+node=0 test node: go to node 1 if measurement as m/z of 569 <= 1330.0 else to node 6.
+	node=1 test node: go to node 2 if measurement as m/z of 805 <= 260.0 else to node 5.
+		node=2 test node: go to node 3 if measurement as m/z of 109 <= 775.0 else to node 4.
+			node=3 leaf node.
+			node=4 leaf node.
+		node=5 leaf node.
+	node=6 leaf node.
+
+ 

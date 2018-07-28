@@ -6,7 +6,7 @@ reference: https://www.kaggle.com/cyberzhg/sklearn-pca-svm/data
 import numpy as np, matplotlib.pyplot as plt, seaborn as sns
 from sklearn.decomposition import PCA
 
-COMPONENT_NUM = 15
+COMPONENT_NUM = 23 # a bit over to justify 20
 CIGTOTAL = 3
 G6, JUUL, BLU = 1, 2, 3
 
@@ -49,7 +49,7 @@ opacity = 0.4
 
 rec = ax.bar(index, Y, bar_width, alpha=opacity, color='g')
 ax.set_ylim(0., 1.2)
-autolabel(rec)
+autolabel(rec)'''
 
 def addLineLabel(plot, values):
 	i = 0
@@ -62,12 +62,12 @@ plt.semilogy(pca.explained_variance_ratio_.cumsum(), '--o', label='cumulative ex
 #plt.ylim([10^3, 1])
 addLineLabel(plt, pca.explained_variance_ratio_)
 addLineLabel(plt, pca.explained_variance_ratio_.cumsum())
-
+plt.xticks(np.arange(1, COMPONENT_NUM, 1.))
 plt.xlabel('number of components')
 plt.ylabel('cumulative explained variance')
 plt.title('cumulative variance explained up to 20 trials of E-cig measurements')
 plt.legend(loc=3)
-plt.show()'''
+plt.show()
 
 # step 4: plot PCAs into 2D plot
 # reference: https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html
@@ -105,11 +105,11 @@ for i in range(len(train_data[0]) - 1):
 		fig.savefig('pca_%d_%d.png' % (i+1, j+1))'''
 
 # step 5: plot PCAs heatmap
-fig = plt.figure(figsize=(16,6))
+'''fig = plt.figure(figsize=(16,6))
 ax = sns.heatmap(pca.components_, yticklabels=range(1, COMPONENT_NUM + 1), cmap='RdBu')
 ax.set_ylabel('Number of PCs')
 ax.set_xlabel('Feature Column Number')
 plt.title('PCA plot of three e-cig for 20 measurements')
 plt.tight_layout()
-plt.show()
+plt.show()'''
 #fig.savefig('pca_heatmap_abg_14.png')

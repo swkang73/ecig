@@ -8,6 +8,7 @@ from sklearn.decomposition import PCA
 from sklearn.svm import SVC
 
 COMPONENT_NUM = 20
+RANOM_STATE = 0
 CIGTOTAL = 3
 G6 = 1
 JUUL = 2
@@ -20,7 +21,7 @@ def getAns(index):
     return BLU
 
 print('Read training data...')
-with open('training-del.csv', 'r') as reader:
+with open('training.csv', 'r') as reader:
     train_label = []
     train_data = []
     for line in reader.readlines():
@@ -37,7 +38,7 @@ pca.fit(train_data)
 train_data = pca.transform(train_data)
 
 print('Train SVM...')
-svc = SVC()
+svc = SVC(random_state=RANOM_STATE, probability=True)
 svc.fit(train_data, train_label)
 
 print('Read testing data...')
@@ -52,9 +53,11 @@ print('Predicting...')
 test_data = np.array(test_data)
 test_data = pca.transform(test_data)
 predict = svc.predict(test_data)
+prob = svc.predict_proba(test_data)
+
 
 print('Saving...')
-with open('pca_predict.csv', 'w') as outcsv:
+with open('svm_pca_predict.csv', 'w') as outcsv:
     writer = csv.DictWriter(outcsv, fieldnames = ['Index', 'Prediction', 'Actual'])
     writer.writeheader()
 
