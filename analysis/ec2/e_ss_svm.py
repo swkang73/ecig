@@ -77,7 +77,7 @@ ax.plot(X, Y)
 plt.xlabel('sample size')
 plt.xticks(np.arange(1, len(train_label) / 3, 1.))
 plt.ylabel('accuracy')
-plt.title('Empirical PCA learning curve for G6, Blu, and Juul')
+plt.title('Empirical PCA + SVM learning curve for G6, Blu, and Juul')
 plt.show()
 	
 

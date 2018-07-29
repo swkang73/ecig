@@ -4,9 +4,8 @@ classifies e-cigarette mass scan into three e-cig (G6 / Juul / Blu)
 reference 1: http://scikit-learn.org/stable/modules/neural_networks_supervised.html
 '''
 
-import os, csv, numpy as np, matplotlib.pyplot as plt, pandas as pd
+import os, csv, numpy as np, matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler 
-from sklearn.decomposition import PCA 
 from sklearn.neural_network import MLPClassifier
 
 COMPONENT_NUM = 20
