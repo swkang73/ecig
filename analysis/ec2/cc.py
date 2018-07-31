@@ -56,6 +56,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler 
 from sklearn.decomposition import PCA
 # classifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
@@ -65,7 +68,7 @@ from sklearn.metrics import (brier_score_loss, precision_score, recall_score,
 from sklearn.calibration import CalibratedClassifierCV, calibration_curve
 #from sklearn.model_selection import train_test_split
 
-RANOM_STATE = 0
+RANDOM_STATE = 0
 COMPONENT_NUM = 20
 CIGTOTAL = 3
 # convert to binary
@@ -109,7 +112,17 @@ with open('testing.csv', 'r') as reader:
         test_data.append(pixels)
 
 # get X_train, X_test, y_train, y_test
-X_train, X_test = np.array(train_data), np.array(test_data)
+raw_X_train, raw_X_test = np.array(train_data), np.array(test_data)
+# pca 
+pca = PCA(n_components=COMPONENT_NUM, whiten=True)
+pca.fit(raw_X_train)
+pca_X_train, pca_X_test = pca.transform(raw_X_train), pca.transform(raw_X_test) 
+# standard scaler
+scaler = StandardScaler()
+scaler.fit(raw_X_train)
+scaled_X_train, scaled_X_test = scaler.transform(raw_X_train), scaler.transform(raw_X_test) 
+
+
 y_train = np.array(train_label)
 y_test = []
 for index in range(len(test_data)):
@@ -118,33 +131,21 @@ for index in range(len(test_data)):
     else:
         y_test.append(BLU)  
 
-def plot_calibration_curve(clf, name, fig_index, axis_1, axis_2):
-    """Plot calibration curve for est w/o and with calibration. """
-    # Calibrated with isotonic calibration
-    '''isotonic = CalibratedClassifierCV(est, cv=2, method='isotonic')
-
-    # Calibrated with sigmoid calibration
-    sigmoid = CalibratedClassifierCV(est, cv=2, method='sigmoid')
-
-    # Logistic regression with no calibration as baseline
-    lr = LogisticRegression(C=1., solver='lbfgs')'''
-
+f = open('ml_alg_comparison.txt', 'a')
+def plot_calibration_curve(X_train, X_test, clf, name, fig_index, axis_1, axis_2):
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
 
     prob_pos = get_binary_prob(clf.predict_proba(X_test))
     y_test_label = get_binary_ylabel(y_test)
-    print(y_test_label)
-    print('________')
-    print(prob_pos)
+
 
     clf_score = brier_score_loss(y_test_label, prob_pos, pos_label=1)
-    print('here printed')
-    print("%s:" % name)
-    print("\tBrier: %1.3f" % (clf_score))
-    print("\tPrecision: %1.3f" % precision_score(y_test, y_pred, average='macro'))
-    print("\tRecall: %1.3f" % recall_score(y_test, y_pred, average='macro'))
-    print("\tF1: %1.3f\n" % f1_score(y_test, y_pred, average='macro'))
+    f.write("%s:" % name)
+    f.write("\tBrier: %1.3f" % (clf_score))
+    f.write("\tPrecision: %1.3f" % precision_score(y_test, y_pred, average='macro'))
+    f.write("\tRecall: %1.3f" % recall_score(y_test, y_pred, average='macro'))
+    f.write("\tF1: %1.3f\n" % f1_score(y_test, y_pred, average='macro'))
 
     fraction_of_positives, mean_predicted_value = \
         calibration_curve(y_test_label, prob_pos, n_bins=10)
@@ -155,19 +156,33 @@ def plot_calibration_curve(clf, name, fig_index, axis_1, axis_2):
     axis_2.hist(prob_pos, range=(0, 1), bins=10, label=name,
              histtype="step", lw=2)
 
+
+
+# main drawing scripts
 fig = plt.figure(figsize=(10, 10))
 ax1 = plt.subplot2grid((3, 1), (0, 0), rowspan=2)
 ax2 = plt.subplot2grid((3, 1), (2, 0))
 ax1.plot([0, 1], [0, 1], "k:", label="Perfectly calibrated")
 
-# Plot calibration curve for rbf SVC
-plot_calibration_curve(SVC(random_state=RANOM_STATE, probability=True), "raw SVC", 1, ax1, ax2)
+# Plot calibration curve for Gaussian naive bayes
+plot_calibration_curve(pca_X_train, pca_X_test, LogisticRegression(solver='lbfgs'), "PCA + LR", 1, ax1, ax2)
+
+# plot calibration curve for SS + artificial neural network 
+plot_calibration_curve(scaled_X_train, scaled_X_test, MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=RANDOM_STATE), "SS + ANN", 2, ax1, ax2)
+
+# Plot calibration curve for PCA + rbf SVC
+plot_calibration_curve(pca_X_train, pca_X_test, SVC(random_state=RANDOM_STATE, probability=True), "PCA + SVC", 3, ax1, ax2)
 
 # Plot calibration curve for random forest
-plot_calibration_curve(RandomForestClassifier(max_features='sqrt', n_jobs=2, random_state=RANOM_STATE), "Random Forest", 2, ax1, ax2)
+plot_calibration_curve(raw_X_train, raw_X_test, RandomForestClassifier(max_features='sqrt', n_jobs=2, random_state=RANDOM_STATE), "Random Forest", 4, ax1, ax2)
 
-# plot calibration curve for artificial neural network 
-plot_calibration_curve(MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=RANOM_STATE), "raw ANN", 3, ax1, ax2)
+# Plot calibration curve for k nearest neighbours
+plot_calibration_curve(raw_X_train, raw_X_test, KNeighborsClassifier(), "k-NN", 5, ax1, ax2)
+
+# Plot calibration curve for Gaussian naive bayes
+plot_calibration_curve(pca_X_train, pca_X_test, GaussianNB(), "Gaussian NB", 6, ax1, ax2)
+
+f.close()
 
 ax1.set_ylabel("Fraction of positives")
 ax1.set_ylim([-0.05, 1.05])
@@ -178,5 +193,6 @@ ax2.set_xlabel("Mean predicted value")
 ax2.set_ylabel("Count")
 ax2.legend(loc="upper center", ncol=3)
 
-plt.tight_layout()
+#plt.tight_layout()
 plt.show()
+

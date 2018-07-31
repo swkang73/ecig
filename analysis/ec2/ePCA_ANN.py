@@ -67,10 +67,6 @@ y_min, y_max = train_data[:,1].min() - 1, train_data[:,1].max() + 1
 xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
                      np.arange(y_min, y_max, h))
 
-#for i, clf in enumerate((rbf_svc, lin_svc, poly_svc)):
-    # Plot the decision boundary. 
-#plt.subplot(1, 3, i + 1)
-#plt.subplots_adjust(wspace=0.2, hspace=0.2)
 
 Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
 
