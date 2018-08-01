@@ -34,14 +34,14 @@ print('Loaded ' + str(len(train_label)))
 print('Reduction and training...')
 train_label = np.array(train_label)
 train_data = np.array(train_data)
-pca = PCA(n_components=COMPONENT_NUM, whiten=True)
+'''pca = PCA(n_components=COMPONENT_NUM, whiten=True)
 pca.fit(train_data)
-train_data = pca.transform(train_data)
+train_data = pca.transform(train_data)'''
 clf = RandomForestClassifier(max_features='sqrt', n_jobs=2, random_state=RANOM_STATE)
 clf.fit(train_data, train_label)
 
 print('Read testing data...')
-with open('testing.csv', 'r') as reader:
+with open('testing_v2.csv', 'r') as reader:
     test_data = []
     for line in reader.readlines():
         pixels = list(map(float, line.rstrip().split(',')))
@@ -50,28 +50,30 @@ print('Loaded ' + str(len(test_data)))
 
 print('Predicting...')
 test_data = np.array(test_data)
-test_data = pca.transform(test_data)
+#test_data = pca.transform(test_data)
 predict = clf.predict(test_data)
 prob = clf.predict_proba(test_data)
 
 # save prediction
 print('Saving...')
-with open('rf_pca_predict.csv', 'w') as outcsv:
+with open('rf_predict_v2.csv', 'w') as outcsv:
     writer = csv.DictWriter(outcsv, fieldnames = 
-    	['Index', 'Prediction', 'Actual', 
-    	'G6 prob', 'Juul prob', 'Blu prob'])
+        ['Index', 'Prediction'])
     writer.writeheader()
 
     count = 0
     for p in predict:
         writer.writerow({'Index': str(count + 1), 
-        	'Prediction': str(p), 
-        	'Actual': str(getAns(count)),
-        	'G6 prob': prob[count][0], 
-        	'Juul prob': prob[count][1], 
-        	'Blu prob': prob[count][2]})
+        	'Prediction': str(p)})#, 
         count += 1
 
+'''['Index', 'Prediction', 'Actual', 
+        'G6 prob', 'Juul prob', 'Blu prob'])'''
+
+'''Actual': str(getAns(count)),
+            'G6 prob': prob[count][0], 
+            'Juul prob': prob[count][1], 
+            'Blu prob': prob[count][2]})'''
 
 
 

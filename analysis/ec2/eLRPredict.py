@@ -36,9 +36,9 @@ print('Loaded ' + str(len(train_label)))
 print('Reduction and training...')
 train_label = np.array(train_label)
 train_data = np.array(train_data)
-#pca = PCA(n_components=COMPONENT_NUM, whiten=True)
-#pca.fit(train_data)
-#train_data = pca.transform(train_data)
+pca = PCA(n_components=COMPONENT_NUM, whiten=True)
+pca.fit(train_data)
+train_data = pca.transform(train_data)
 clf1 = LogisticRegression(solver='newton-cg')
 clf2 = LogisticRegression(solver='sag')
 clf3 = LogisticRegression(solver='saga')
@@ -49,7 +49,7 @@ clf3.fit(train_data, train_label)
 clf4.fit(train_data, train_label)
 
 print('Read testing data...')
-with open('testing.csv', 'r') as reader:
+with open('testing_v2.csv', 'r') as reader:
     test_data = []
     for line in reader.readlines():
         pixels = list(map(float, line.rstrip().split(',')))
@@ -58,7 +58,7 @@ print('Loaded ' + str(len(test_data)))
 
 print('Predicting...')
 test_data = np.array(test_data)
-#test_data = pca.transform(test_data)
+test_data = pca.transform(test_data)
 predict1 = clf1.predict(test_data)
 predict2 = clf2.predict(test_data)
 predict3 = clf3.predict(test_data)
@@ -67,16 +67,17 @@ prob = clf1.predict_proba(test_data)
 
 # save prediction
 print('Saving...')
-with open('lr_predict.csv', 'w') as outcsv:
+with open('lr_predict_v2.csv', 'w') as outcsv:
+    #'Actual',
     writer = csv.DictWriter(outcsv, fieldnames = 
-    	['Index', 'Actual', 'Newton-cg predict', 
+    	['Index', 'Newton-cg predict', 
     	'Sag predict', 'Saga predict', 'lbfgs predict'])
     writer.writeheader()
 
     count = 0
     for p1, p2, p3, p4 in zip(predict1, predict2, predict3, predict4):
         writer.writerow({'Index': str(count + 1), 
-        	'Actual': str(getAns(count)),
+        	#'Actual': str(getAns(count)),
         	'Newton-cg predict': str(p1),
         	'Sag predict': str(p2),
         	'Saga predict': str(p3),

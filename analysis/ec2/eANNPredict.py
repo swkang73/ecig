@@ -47,7 +47,7 @@ clf.fit(train_data, train_label)
 
 
 print('Read testing data...')
-with open('testing.csv', 'r') as reader:
+with open('testing_v2.csv', 'r') as reader:
     test_data = []
     for line in reader.readlines():
         pixels = list(map(float, line.rstrip().split(',')))
@@ -62,18 +62,18 @@ predict = clf.predict(test_data)
 print(clf.predict_proba(test_data))
 
 # save prediction
-'''print('Saving...')
-with open('ann_predict.csv', 'w') as outcsv:
+print('Saving...')
+with open('ann_ss_predict_v2.csv', 'w') as outcsv:
     writer = csv.DictWriter(outcsv, fieldnames = 
-    	['Index', 'Prediction', 'Actual'])
+    	['Index', 'Prediction'])
     writer.writeheader()
 
     count = 0
     for p in predict:
         writer.writerow({'Index': str(count + 1), 
-        	'Prediction': str(p), 
-        	'Actual': str(getAns(count))})
-        count += 1'''
+        	'Prediction': str(p)})
+        	#'Actual': str(getAns(count))
+        count += 1
 
 
 
