@@ -1,0 +1,6 @@
+LR:	Brier: 0.014	Precision: 1.000	Recall: 0.750	F1: 0.833
+PCA + ANN:	Brier: 0.021	Precision: 0.889	Recall: 0.625	F1: 0.635
+PCA + SVC:	Brier: 0.113	Precision: 0.792	Recall: 0.656	F1: 0.713
+Random Forest:	Brier: 0.024	Precision: 1.000	Recall: 0.750	F1: 0.833
+k-NN:	Brier: 0.094	Precision: 0.857	Recall: 0.688	F1: 0.750
+Gaussian NB:	Brier: 0.156	Precision: 0.808	Recall: 0.594	F1: 0.662

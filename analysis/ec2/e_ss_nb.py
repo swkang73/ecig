@@ -11,10 +11,11 @@ import matplotlib.pyplot as plt
 from sklearn.naive_bayes import GaussianNB
 
 
-CIGTOTAL = 3
-G6 = 1
+CIGTOTAL = 4
+HALO = 1
 JUUL = 2
 BLU = 3
+V2 = 4
 
 # helper functions 
 def getY(predicted, actual):
@@ -56,8 +57,8 @@ clf = GaussianNB()
 for sample_size in range(1, len(train_label) / CIGTOTAL):
 	# train with given sample size
 	X.append(sample_size)
-	train_subset_label = [ train_label[i] for i in range(3 * sample_size) ]
-	train_subset_data = [ train_data[i] for i in range(3 * sample_size) ]
+	train_subset_label = [ train_label[i] for i in range(CIGTOTAL * sample_size) ]
+	train_subset_data = [ train_data[i] for i in range(CIGTOTAL * sample_size) ]
 	train_subset_label = np.array(train_subset_label)
 	train_subset_data = np.array(train_subset_data)
 	clf.fit(train_subset_data, train_subset_label)
@@ -66,12 +67,13 @@ for sample_size in range(1, len(train_label) / CIGTOTAL):
 	predict = clf.predict(original_test_data)
 	Y.append(getY(predict, test_label))
 
-fig, ax = plt.subplots(1, figsize=(8,10))
+fig, ax = plt.subplots(1, figsize=(11,8))
 ax.plot(X, Y)
-plt.xticks(np.arange(1, len(train_label) / 3, 1.))
+plt.xticks(np.arange(1, len(train_label) / CIGTOTAL, 1.))
 plt.xlabel('sample size')
 plt.ylabel('accuracy')
-plt.title('Empirical Gaussian NB learning curve for G6, Blu, and Juul')
+plt.title('Empirical Gaussian NB learning curve for Halo, Juul, Blu, and V2')
+fig.savefig('2_ss_lc/nb_lc.png')
 plt.show()
 	
 

@@ -12,10 +12,11 @@ from sklearn.linear_model import LogisticRegression
 
 RANOM_STATE = 0
 COMPONENT_NUM = 20
-CIGTOTAL = 3
-G6 = 1
+CIGTOTAL = 4
+HALO = 1
 JUUL = 2
 BLU = 3
+V2 = 4
 
 # helper functions 
 def getY(predicted, actual):
@@ -48,7 +49,7 @@ with open('testing.csv', 'r') as reader:
         test_data.append(pixels)
 print('Loaded ' + str(len(test_data)))
 
-print('Empirical learning curve for RF generated')
+print('Empirical learning curve for LR generated')
 X, Y = ([] for i in range(2))
 
 # Initialize for iteration
@@ -61,24 +62,25 @@ clf = LogisticRegression(solver='lbfgs')
 for sample_size in range(1, len(train_label) / CIGTOTAL):
 	# train with given sample size
 	X.append(sample_size)
-	train_subset_label = [ train_label[i] for i in range(3 * sample_size) ]
-	train_subset_data = [ train_data[i] for i in range(3 * sample_size) ]
-	pca = PCA(n_components=COMPONENT_NUM, whiten=True)
-	pca.fit(train_subset_data)
-	train_subset_data = pca.transform(train_subset_data)
+	train_subset_label = [ train_label[i] for i in range(CIGTOTAL * sample_size) ]
+	train_subset_data = [ train_data[i] for i in range(CIGTOTAL * sample_size) ]
+	#pca = PCA(n_components=COMPONENT_NUM, whiten=True)
+	#pca.fit(train_subset_data)
+	#train_subset_data = pca.transform(train_subset_data)
 	clf.fit(train_subset_data, train_subset_label)
 	
 	# test the trained classifier
-	test_data = pca.transform(original_test_data)
+	#test_data = pca.transform(original_test_data)
 	predict = clf.predict(test_data)
 	Y.append(getY(predict, test_label))
 
-fig, ax = plt.subplots(1, figsize=(8,10))
+fig, ax = plt.subplots(1, figsize=(11,8))
 ax.plot(X, Y)
-plt.xticks(np.arange(1, len(train_label) / 3, 1.))
+plt.xticks(np.arange(1, len(train_label) / CIGTOTAL, 1.))
 plt.xlabel('sample size')
 plt.ylabel('accuracy')
-plt.title('Empirical PCA + LR learning curve for G6, Blu, and Juul')
+plt.title('Empirical LR learning curve for Halo, Juul, Blu, and V2')
+fig.savefig('2_ss_lc/lr_lc.png')
 plt.show()
 	
 

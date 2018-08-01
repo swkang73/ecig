@@ -11,15 +11,16 @@ from sklearn.ensemble import RandomForestClassifier
 
 RANOM_STATE = 0
 COMPONENT_NUM = 20
-CIGTOTAL = 3
-G6 = 1
+CIGTOTAL = 4
+HALO = 1
 JUUL = 2
 BLU = 3
+V2 = 4
 
 def getAns(index):
     if (index + 1) % CIGTOTAL != 0:
         return (index + 1) % CIGTOTAL
-    return BLU
+    return V2
 
 print('Read training data...')
 with open('training.csv', 'r') as reader:
@@ -41,7 +42,7 @@ clf = RandomForestClassifier(max_features='sqrt', n_jobs=2, random_state=RANOM_S
 clf.fit(train_data, train_label)
 
 print('Read testing data...')
-with open('testing_v2.csv', 'r') as reader:
+with open('testing.csv', 'r') as reader:
     test_data = []
     for line in reader.readlines():
         pixels = list(map(float, line.rstrip().split(',')))
@@ -56,15 +57,16 @@ prob = clf.predict_proba(test_data)
 
 # save prediction
 print('Saving...')
-with open('rf_predict_v2.csv', 'w') as outcsv:
+with open('rf_predict.csv', 'w') as outcsv:
     writer = csv.DictWriter(outcsv, fieldnames = 
-        ['Index', 'Prediction'])
+        ['Index', 'Prediction', 'Actual'])
     writer.writeheader()
 
     count = 0
     for p in predict:
         writer.writerow({'Index': str(count + 1), 
-        	'Prediction': str(p)})#, 
+        	'Prediction': str(p), 
+            'Actual': str(getAns(count))})
         count += 1
 
 '''['Index', 'Prediction', 'Actual', 

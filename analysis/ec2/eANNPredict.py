@@ -6,19 +6,21 @@ reference 1: http://scikit-learn.org/stable/modules/neural_networks_supervised.h
 
 import os, csv, numpy as np, matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler 
+from sklearn.decomposition import PCA
 from sklearn.neural_network import MLPClassifier
 
 COMPONENT_NUM = 20
 RANOM_STATE = 0
-CIGTOTAL = 3
-G6 = 1
+CIGTOTAL = 4
+HALO = 1
 JUUL = 2
 BLU = 3
+V2 = 4
 
 def getAns(index):
     if (index + 1) % CIGTOTAL != 0:
         return (index + 1) % CIGTOTAL
-    return BLU
+    return V2
 
 print('Read training data...')
 with open('training.csv', 'r') as reader:
@@ -33,12 +35,12 @@ print('Loaded ' + str(len(train_label)))
 print('Neural network training...')
 train_label = np.array(train_label)
 train_data = np.array(train_data)
-scaler = StandardScaler()
+'''scaler = StandardScaler()
 scaler.fit(train_data)
-train_data = scaler.transform(train_data)
-# pca = PCA(n_components=COMPONENT_NUM, whiten=True)
-# pca.fit(train_data)
-# train_data = pca.transform(train_data)
+train_data = scaler.transform(train_data)'''
+'''pca = PCA(n_components=COMPONENT_NUM, whiten=True)
+pca.fit(train_data)
+train_data = pca.transform(train_data)'''
 # solver suitable for small scale classifier 
 clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=RANOM_STATE)
 # default: clf = MLPClassifier(solver='lbfgs', random_state=RANOM_STATE)
@@ -47,7 +49,7 @@ clf.fit(train_data, train_label)
 
 
 print('Read testing data...')
-with open('testing_v2.csv', 'r') as reader:
+with open('testing.csv', 'r') as reader:
     test_data = []
     for line in reader.readlines():
         pixels = list(map(float, line.rstrip().split(',')))
@@ -57,22 +59,22 @@ print('Loaded ' + str(len(test_data)))
 print('Predicting...')
 test_data = np.array(test_data)
 #test_data = pca.transform(test_data)
-test_data = scaler.transform(test_data)
+#test_data = scaler.transform(test_data)
 predict = clf.predict(test_data)
-print(clf.predict_proba(test_data))
+
 
 # save prediction
 print('Saving...')
-with open('ann_ss_predict_v2.csv', 'w') as outcsv:
+with open('ann_predict.csv', 'w') as outcsv:
     writer = csv.DictWriter(outcsv, fieldnames = 
-    	['Index', 'Prediction'])
+    	['Index', 'Prediction', 'Actual'])
     writer.writeheader()
 
     count = 0
     for p in predict:
         writer.writerow({'Index': str(count + 1), 
-        	'Prediction': str(p)})
-        	#'Actual': str(getAns(count))
+        	'Prediction': str(p),
+        	'Actual': str(getAns(count))})
         count += 1
 
 
