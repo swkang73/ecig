@@ -10,7 +10,7 @@ from sklearn.decomposition import PCA
 from sklearn.neural_network import MLPClassifier
 
 COMPONENT_NUM = 20
-RANOM_STATE = 0
+RANDOM_STATE = 0
 CIGTOTAL = 4
 HALO = 1
 JUUL = 2
@@ -43,7 +43,7 @@ pca.fit(train_data)
 train_data = pca.transform(train_data)'''
 # solver suitable for small scale classifier 
 clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=RANOM_STATE)
-# default: clf = MLPClassifier(solver='lbfgs', random_state=RANOM_STATE)
+# default: clf = MLPClassifier(solver='lbfgs', random_state=RANDOM_STATE)
 clf.fit(train_data, train_label)
 
 
