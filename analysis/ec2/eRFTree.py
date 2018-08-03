@@ -9,10 +9,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import export_graphviz
 
 RANDOM_STATE = 0
-CIGTOTAL = 3
+CIGTOTAL = 4
 G6 = 1
 JUUL = 2
 BLU = 3
+V2 = 4
 
 print('Read training data...')
 with open('training.csv', 'r') as reader:

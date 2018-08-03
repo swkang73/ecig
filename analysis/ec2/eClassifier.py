@@ -16,7 +16,7 @@ from sklearn.neural_network import MLPClassifier
 COMPONENT_NUM = 2
 RANOM_STATE = 0
 CIGTOTAL = 3
-G6, JUUL, BLU = 1, 2, 3
+HALO, JUUL, BLU, V2 = 1, 2, 3, 4
 h = 0.02 # for mesh grid  
 
 
@@ -26,8 +26,21 @@ def getlabel(index):
 		return 'G6'
 	elif index % CIGTOTAL == 1: 
 		return 'Juul'
-	else: 
+	elif index % CIGTOTAL == 2: 
 		return 'Blu'
+	else: 
+		return 'V2'
+
+
+def getcolor(index):
+	if index % CIGTOTAL == 0:
+		return 'r'
+	elif index % CIGTOTAL == 1: 
+		return 'g'
+	elif index % CIGTOTAL == 2: 
+		return 'b'
+	else:
+		return 'orange'
 
 
 # step 1: open files
@@ -41,7 +54,7 @@ with open('training.csv', 'r') as reader:
 print('Loaded ' + str(len(train_label)))
 
 # step 2: PCA reduction + svm
-print('PCA Reduction and ANN fitting...')
+print('PCA Reduction and CLF fitting...')
 train_label = np.array(train_label)
 train_data = np.array(train_data)
 pca = PCA(n_components=COMPONENT_NUM, whiten=True)
@@ -58,21 +71,6 @@ svm_clf = SVC(random_state=RANOM_STATE).fit(train_data, train_label)
 # reference 1: https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html
 # ref 2: http://scikit-learn.org/0.17/auto_examples/svm/plot_iris.html
 
-def getcolor(index):
-	if index % CIGTOTAL == 0:
-		return 'r'
-	elif index % CIGTOTAL == 1: 
-		return 'b'
-	else: 
-		return 'g'
-
-def getlabel(index):
-	if index  % CIGTOTAL == 0:
-		return 'G6'
-	elif index % CIGTOTAL == 1: 
-		return 'Juul'
-	else: 
-		return 'Blu'
 
 #for i in range(len(train_data[0]) - 1):
 #	for j in range(i + 1, len(train_data[0])):
@@ -105,8 +103,8 @@ for i, clf in enumerate((kn_clf, nb_clf, lr_clf, svm_clf, mlp_clf)):
 
 	# Put the result into a color plot
 	Z = Z.reshape(xx.shape)
-	plt.contourf(xx, yy, Z, cmap=LCmap(('coral', 'cornflowerblue', 'olive')), alpha=0.8)
-	plt.scatter(train_data[:, 0], train_data[:, 1], c=train_label, cmap=LCmap(('red', 'blue', 'green')))
+	plt.contourf(xx, yy, Z, cmap=LCmap(('coral', 'olive', 'cornflowerblue', 'yellow')), alpha=0.8)
+	plt.scatter(train_data[:, 0], train_data[:, 1], c=train_label, cmap=LCmap(('red', 'green', 'blue', 'orange')))
 
 	plt.xlabel('1st component')
 	plt.ylabel('2nd component')
