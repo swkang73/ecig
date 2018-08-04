@@ -39,9 +39,9 @@ train_data = np.array(train_data)
 '''pca = PCA(n_components=COMPONENT_NUM, whiten=True)
 pca.fit(train_data)
 train_data = pca.transform(train_data)'''
-scaler = StandardScaler()
+'''scaler = StandardScaler()
 scaler.fit(train_data)
-train_data = scaler.transform(train_data)
+train_data = scaler.transform(train_data)'''
 clf1 = GaussianNB()
 clf2 = MultinomialNB()
 clf3 = BernoulliNB()
@@ -50,7 +50,7 @@ clf2.fit(train_data, train_label)
 clf3.fit(train_data, train_label)
 
 print('Read testing data...')
-with open('testing.csv', 'r') as reader:
+with open('testing_vaporfi.csv', 'r') as reader:
     test_data = []
     for line in reader.readlines():
         pixels = list(map(float, line.rstrip().split(',')))
@@ -60,7 +60,7 @@ print('Loaded ' + str(len(test_data)))
 print('Predicting...')
 test_data = np.array(test_data)
 #test_data = pca.transform(test_data)
-test_data = scaler.transform(test_data)
+#test_data = scaler.transform(test_data)
 predict1 = clf1.predict(test_data)
 predict2 = clf2.predict(test_data)
 predict3 = clf3.predict(test_data)
@@ -68,7 +68,7 @@ prob = clf1.predict_proba(test_data)
 
 
 print('Saving...')
-with open('different_nb_ss_predict.csv', 'w') as outcsv:
+with open('vpf_different_nb_ss_predict.csv', 'w') as outcsv:
     writer = csv.DictWriter(outcsv, fieldnames = ['Index', 'Actual', 'Gaussian P', 'Multinomial P', 'Bernoulli P'])
     writer.writeheader()
 

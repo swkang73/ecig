@@ -38,18 +38,18 @@ train_data = np.array(train_data)
 '''scaler = StandardScaler()
 scaler.fit(train_data)
 train_data = scaler.transform(train_data)'''
-'''pca = PCA(n_components=COMPONENT_NUM, whiten=True)
+pca = PCA(n_components=COMPONENT_NUM, whiten=True)
 pca.fit(train_data)
-train_data = pca.transform(train_data)'''
+train_data = pca.transform(train_data)
 # solver suitable for small scale classifier 
-clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=RANOM_STATE)
+clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=RANDOM_STATE)
 # default: clf = MLPClassifier(solver='lbfgs', random_state=RANDOM_STATE)
 clf.fit(train_data, train_label)
 
 
 
 print('Read testing data...')
-with open('testing.csv', 'r') as reader:
+with open('testing_vaporfi.csv', 'r') as reader:
     test_data = []
     for line in reader.readlines():
         pixels = list(map(float, line.rstrip().split(',')))
@@ -58,14 +58,14 @@ print('Loaded ' + str(len(test_data)))
 
 print('Predicting...')
 test_data = np.array(test_data)
-#test_data = pca.transform(test_data)
+test_data = pca.transform(test_data)
 #test_data = scaler.transform(test_data)
 predict = clf.predict(test_data)
 
 
 # save prediction
 print('Saving...')
-with open('ann_predict.csv', 'w') as outcsv:
+with open('vpf_ann_predict.csv', 'w') as outcsv:
     writer = csv.DictWriter(outcsv, fieldnames = 
     	['Index', 'Prediction', 'Actual'])
     writer.writeheader()

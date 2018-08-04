@@ -44,7 +44,7 @@ svc = SVC(random_state=RANOM_STATE, probability=True)
 svc.fit(train_data, train_label)
 
 print('Read testing data...')
-with open('testing.csv', 'r') as reader:
+with open('testing_vaporfi.csv', 'r') as reader:
     test_data = []
     for line in reader.readlines():
         pixels = list(map(float, line.rstrip().split(',')))
@@ -59,7 +59,7 @@ prob = svc.predict_proba(test_data)
 
 
 print('Saving...')
-with open('svm_predict.csv', 'w') as outcsv:
+with open('vpf_svm_predict.csv', 'w') as outcsv:
     writer = csv.DictWriter(outcsv, fieldnames = ['Index', 'Prediction', 'Actual'])
     writer.writeheader()
 
