@@ -50,7 +50,7 @@ clf3.fit(train_data, train_label)
 clf4.fit(train_data, train_label)
 
 print('Read testing data...')
-with open('testing_vaporfi.csv', 'r') as reader:
+with open('testing_vaporfi2.csv', 'r') as reader:
     test_data = []
     for line in reader.readlines():
         pixels = list(map(float, line.rstrip().split(',')))
