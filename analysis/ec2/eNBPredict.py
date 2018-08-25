@@ -50,7 +50,7 @@ clf2.fit(train_data, train_label)
 clf3.fit(train_data, train_label)
 
 print('Read testing data...')
-with open('testing_vaporfi2.csv', 'r') as reader:
+with open('testing_square.csv', 'r') as reader:
     test_data = []
     for line in reader.readlines():
         pixels = list(map(float, line.rstrip().split(',')))
@@ -68,7 +68,7 @@ prob = clf1.predict_proba(test_data)
 
 
 print('Saving...')
-with open('vpf2_different_nb_ss_predict.csv', 'w') as outcsv:
+with open('square_different_nb_ss_predict.csv', 'w') as outcsv:
     writer = csv.DictWriter(outcsv, fieldnames = ['Index', 'Actual', 'Gaussian P', 'Multinomial P', 'Bernoulli P'])
     writer.writeheader()
 

@@ -49,7 +49,7 @@ clf.fit(train_data, train_label)
 
 
 print('Read testing data...')
-with open('testing_vaporfi2.csv', 'r') as reader:
+with open('testing_square.csv', 'r') as reader:
     test_data = []
     for line in reader.readlines():
         pixels = list(map(float, line.rstrip().split(',')))
@@ -65,7 +65,7 @@ predict = clf.predict(test_data)
 
 # save prediction
 print('Saving...')
-with open('vpf2_ann_pca_predict.csv', 'w') as outcsv:
+with open('square_ann_pca_predict.csv', 'w') as outcsv:
     writer = csv.DictWriter(outcsv, fieldnames = 
     	['Index', 'Prediction', 'Actual'])
     writer.writeheader()
